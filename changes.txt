@@ -2,7 +2,7 @@ Version 2.03
 
 - Update Retail version for WoW 9.0
 
-- Update Classic version fpr Wow 1.13.5
+- Update Classic version for Wow 1.13.5
 
 - Add Packager files and info; split uploads for Classic and Retail
 

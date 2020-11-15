@@ -1,3 +1,9 @@
+2.03 (Release)
+- Update Retail version for WoW 9.0
+- Update Classic version fpr Wow 1.13.5
+- Add Packager files and info; split uploads for Classic and Retail
+- Fix Classic Comparison tooltips for Ranged/Wand/Relic items
+
 2.02 (Release)
 - TOC Update for WoW 8.2.5
 - Fix load error in Classic
