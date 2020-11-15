@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Instructions for making your AddOn compatible with LinkWrangler:</title><meta name="Template" content="D:\Program Files\Microsoft Office\Office\html.dot"></head>
+<body link="#0000ff" vlink="#800080"><h3><a name="Basic_Instructions"></a><span style="font-weight: bold;">Basic Instructions
+for making your AddOn compatible with
+LinkWrangler:</span></h3>
+<p>1.) Add a function to your
+AddOn that will handle the content
+you wish to add to a LinkWrangler Tooltip. It should match the
+following prototype, but can have any name you wish (i.e. only the
+function arguments are required). The function may be a local function.</p>
+<code>function MyAddOn_AddStuff(frame,link)
+<br>&nbsp;&nbsp;&nbsp; local newline =
+&lt;use link to construct line to add to tooltip&gt;
+<br>&nbsp;&nbsp;&nbsp; frame:AddLine(newline);
+<br>end
+</code><ul><li><span style="font-style: italic;">frame</span>
+is a <code>GameTooltip</code> object derived
+from <code>GameTooltipTemplate</code> </li>
+<li><span style="font-style: italic;">link</span>
+is a basic link (no
+colour/formatting info or displayable name). <span style="font-style: italic;">link</span>
+is usually a copy of the first
+parameter originally passed to
+<code>SetItemRef</code></li>
+</ul><p>&nbsp;2.) Register the <code>VARIABLES_LOADED</code>
+event, i.e. add the
+following code to your AddOn’s
+<code>OnLoad</code> Handler:</p>
+<code>self:RegisterEvent("VARIABLES_LOADED");
+</code><ul><li><code>VARIABLES_LOADED</code>
+is chosen as, when this&nbsp;event fires, LinkWrangler is guaranteed to be fully loaded and initialized</li></ul><p>3.)
+Add the following code to
+your AddOn's <code>OnEvent</code> handler:</p>
+<code>if (event ==
+"VARIABLES_LOADED") then
+<br>&nbsp;&nbsp;&nbsp; if (LinkWrangler ~= nil) then
+<br>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+LinkWrangler.RegisterCallback ("MyAddOnName", MyAddOn_AddStuff,
+"refresh");
+<br>&nbsp;&nbsp;&nbsp; end
+<br>end</code><ul><li><a href="#RegisterCallback"><code>RegisterCallback</code></a>
+has additional options</li><li>The the first parameter used
+in <code>RegisterCallback</code>
+should be a String containing your AddOn's name – this value is used as
+a "key",
+and needs to be unique to your AddOn. Note that the user can view this
+name, to find out which AddOns are currently registered, so it must be
+printable</li><li>The second parameter of <code>RegisterCallback</code>&nbsp;accepts
+either a string containing the global name of your function, or a
+reference to the function itself</li><li>Once your callback
+function is
+registered, it will be called
+when any LinkWrangler window is opened or needs to be redrawn</li></ul>
+<hr style="width: 100%; height: 2px;"><h3><a name="LinkWrangler_global"></a>The <span style="font-weight: bold;">LinkWrangler</span>
+global variable</h3><p>
+This is a table holding exportable functions and variables for the new
+LinkWrangler-API. The following are documented:
+</p><p><span style="font-weight: bold;">Version</span><br>
+A&nbsp;floating point number containing the current version number.
+E.g.<br>
+&nbsp;&nbsp;&nbsp; if LinkWrangler.Version &gt;= 1.6
+then ...
+</p><p><span style="font-weight: bold;">CloseAllWindows
+()</span><br>
+Function to&nbsp;close all LinkWrangler windows</p><span style="font-weight: bold;">MinimizeAllWindows () </span>(version
+1.63 or later)<br>Function which toggles states of open windows
+as follows:<br>If all open windows are already minimized, then
+all windows become maximized<br>Otherwise all windows become
+minimized.
+<p><span style="font-weight: bold;">MasterSwitch
+("option" [,flag])</span><br>
+Function to enable or disable LinkWrangler, where "option" is one of
+"enable", "disable", "toggle" or "switch".<br>
+If "switch" is used, LinkWranger is enabled or disabled according to
+whether the optional flag parameter tests as true or false<br>
+Note: When LinkWrangler is disabled, all windows will be closed. It
+will also stop any background activities, such as tracking names in
+chat for the Whisper buttons.</p><p><span style="font-weight: bold;">SlashHandler
+(&lt;command&gt;)</span><br>Feeds the specified
+command string to the LinkWrangler slash command handler. Do not
+include the initial "/lw " part of the command.<br>Note:
+The command set accepted by the slash handler is likely to change
+between versions.<br>Available commands are documented in <a href="SlashCommands.htm">SlashCommands.htm</a>
+</p><span style="font-weight: bold;"><a name="RegisterCallback"></a>RegisterCallback
+("AddOnName", CallbackFunction&nbsp;, "event" [, "event" [, ...]] )</span><br>
+Register <a href="#Callback_function">your
+callback function</a> to be called by LinkWrangler when
+certain events occur.
+<br><span style="font-style: italic;">"AddOnName"</span>
+is a key used to identify your addon - preferably it
+should be the name of your AddOn, as this means it will probably be
+unique, and allows the user to identify which addons are registered
+with LinkWrangler. It must be a string.
+<br><span style="font-style: italic;">CallbackFunction</span>
+is the function in your addon that you
+want
+LinkWrangler to call. This parameter must be one of the following:<br>
+<div style="margin-left: 40px;"><span style="font-style: italic;">A string containing the name of
+your function</span>. The name must be a
+global variable which resolves to a function&nbsp;using <code>_G[]</code><br>
+<span style="font-style: italic;">A reference to your
+function</span>. In this case your function may be local.<br>
+<span style="font-style: italic;">nil</span> : this
+removes a function that you have previously registered.
+</div><span style="font-style: italic;">"event"</span>
+must be 1 or more <span style="font-style: italic;">string</span>
+parameters from the following: "refresh",&nbsp;"show", "hide",
+"maximize", "minimize", "allocate",&nbsp;"showcomp", "refreshcomp",
+"hidecomp",
+"allocatecomp", "item", "spell", "enchant", "achievement", "talent",
+"quest", "glyph". These correspond to the events described under the <a href="#Your_Callback_function">your callback function</a> section. Some events were not available in earlier versions; refer to that same section for version numbers.<br><br>
+<span style="font-weight: bold;">success [, value[,
+value]] =
+CallbackData ("AddOnName", "command")</span><br>Request
+onformation about or modify the way LinkWrangler handles your AddOn.<br>Commands<br><div style="margin-left: 40px;"><span style="font-style: italic;">"enable"</span>: enable
+the named AddOn for main windows<br><span style="font-style: italic;">"disable"</span>: disable
+the named AddOn for main windows<br><span style="font-style: italic;">"enablecomp"</span>:
+enable the named AddOn for compare windows<br><span style="font-style: italic;">"disablecomp"</span>:
+disable the named AddOn for compare windows<br>Each of the 4
+commands above, if succesful, return true, &lt;main enable
+status&gt;, &lt;compare enable status&gt;<br><span style="font-style: italic;">"test"</span>: Test the
+state of the named AddOn.<br><div style="margin-left: 40px;">If
+it exists, returns true, &lt;main enable status&gt;,
+&lt;compare enable status&gt;<br>If it doesn't exist,
+returns nil<br>The test command will never return any error
+messages</div></div>If an error is
+detected, returns nil and an error message string (and depending on
+debug settings, may pop up an error window).<br>An
+AddOn which has been 'disabled' will no longer receive events from
+LinkWrangler windows. The settings for main and compare windows are
+independant.<br>Note:
+This function should not be used during the <code>"ADDON_LOADED"</code> event for
+LinkWrangler, but should be valid any time after that event.<br><br>
+<span style="font-weight: bold;">frame, state, link,
+textlink, name, whisper, linktype = GetLinkInfo ( tooltipframe | link |
+textlink&nbsp;)</span><br>
+The parameter must be one of the following:<br>
+<div style="margin-left: 40px;"><span style="font-style: italic;">tooltipframe</span>: a
+reference to one of the LinkWrangler tooltip windows (e.g. a frame
+value received by your callback function)<br>
+<span style="font-style: italic;">link</span>: a
+string containing a basic link (no colour or name info) - tries to find
+an <span style="font-style: italic;">open</span>
+LinkWrangler window displaying this link<br>
+<span style="font-style: italic;">textlink</span>: a
+string containing&nbsp;full link, colour and name info (as received from GetItemInfo) - looks
+for an open LinkWrangler window holding this text link - note that if
+the
+stored link is localised to a different language it will not match<br>
+<span style="font-style: italic;"></span><span style="font-style: italic;"></span><span style="font-style: italic;"></span></div>Return
+values:<br>
+<div style="margin-left: 40px;"><span style="font-style: italic;">frame</span> : reference
+to the tooltip window&nbsp;- will
+be <span style="font-style: italic;">nil</span> if
+no match was found<br>
+<span style="font-style: italic;">state</span> : a
+number representing the current state of the frame:-<br>
+<div style="margin-left: 40px;">0 or negative: The window
+is closed. All return values following <span style="font-style: italic;">state</span> should be
+treated as invalid
+(probably nil)<br>
+1 : Window is open<br>
+2 : Window is minimized <br>
+Other values may be returned. Assume that the other return values will
+be valid if and only if state &gt;= 1
+</div><span style="font-style: italic;">link</span>
+: a string containing a link (item-link, spell-link, etc.), suitable
+for use in
+SetHyperlink.<br>
+<span style="font-style: italic;">textlink</span> :
+a Link String&nbsp;containing link, name and colour codes, suitable
+for use in a chat message (not always available, may be nil)<br>
+<span style="font-style: italic;">name</span> : a
+string containing the name of the linked item (or spell, etc.)<br>
+<span style="font-style: italic;">whisper</span> : a
+string containing
+the name of the person who most recently linked this item into chat
+- i.e. the person you would get if you click the Whisper button on the
+tooltip. If there is no&nbsp;whisperer, will be nil<br><span style="font-style: italic;">linktype</span> : a string describing the type of link, e.g. "item" or "spell"</div>
+<span style="font-weight: bold;"><br>frame =
+OpenTooltip (link [,{options}])</span> (version 1.64 or later<span style="font-style: italic;"></span>)<br>Opens a LinkWrangler tooltip window using the supplied
+link.<br><div style="margin-left: 40px;"><span style="font-style: italic;">link</span>:
+Expected to be of the same format as the first parameter of <code>SetItemRef</code>.
+Will accept any string containing a substring of this type (for
+example, a
+full Link String containing colour values)<br><span style="font-style: italic;">{options}</span>: if
+supplied, must be a table where the following keys &amp; values may
+be set:<br><div style="margin-left: 40px;">whisper=&lt;string&gt;
+: sets whisper function to the character named
+in&nbsp;&lt;string&gt;<br>textlink=&lt;string&gt;
+: supplies a string which may be used for relinking; LinkWrangler only
+uses this if it cannot obtain a textlink by another method<br>openmin=true
+: causes the LinkWrangler window to be opened as a minimized window</div><span style="font-style: italic;"></span>(The <span style="font-style: italic;">options</span> table can
+be reused, recycled or discarded after this function returns)</div>Return
+values<br><div style="margin-left: 40px;"><span style="font-style: italic;">frame</span> : the window
+that LinkWrangler will attempt to open with the link. Will be <span style="font-style: italic;">nil</span> if an error was
+encountered. Note that at the time this function returns, the window
+may not yet have opened - use <span style="font-style: italic;">GetLinkInfo</span>
+to check the state, or register the <span style="font-style: italic;">refresh</span> or <span style="font-style: italic;">open</span> event<br><span style="font-style: italic;"></span></div><span style="font-weight: bold;"><br>ButtonClick (button) </span>{Hook}
+(version 1.77 or later)<br>May be hooked to detect when one of
+the buttons on a tooltip is clicked. Use button:GetParent() to
+determine which tooltip.<br>The following extra values are
+defined:<br><div style="margin-left: 40px;">button.<span style="font-style: italic;">ButtonType</span> : key
+value (string) used to determine which type of button was clicked<br>button.<span style="font-style: italic;">IsCompare</span>
+: true if the button belongs to a Compare tooltip</div>ButtonTypes:
+"CloseMain", "CloseComp", "Minimize", "Compare", "Whisper", "Relink",
+"Link", "Dressup", "Capture"<br><p><span style="font-weight: bold;">Undocumented
+Exports</span><br>Several
+functions and values are also exported in the LinkWrangler table, which
+are used internally by LinkWrangler, and which are not documented
+above. These are subject to change, so should not be called or hooked
+by any other AddOns at this time.
+</p><span style="font-weight: bold;"></span><br><hr style="width: 100%; height: 2px;"><h3><a name="Your_Callback_function"></a><span style="font-weight: bold;"><a name="Callback_function"></a>Your
+Callback
+function</span></h3>
+<p>The function should follow this prototype:<br>
+<code>function MyAddon_Callback (frame, link [, event])</code>
+</p><p><span style="font-style: italic;">frame</span>
+will be a reference to the LinkWrangler frame, which is derived from
+<code>GameTooltipTemplate</code><br>
+<span style="font-style: italic;">link</span> will
+normally be an Item
+String containing the link ID of the current item, with no name or
+colour codes. In certain circumstances, may be nil<br>
+<span style="font-style: italic;">event</span> will
+be a string containing the name of the event. Will be nil for&nbsp;<span style="font-style: italic;">refresh</span>
+events.
+</p>The optional event parameter will be one of the following
+codes; note that
+while multiple events may be
+passed to RegisterCallback (to register the same function for multiple
+events),&nbsp;the callback function will only receive one event
+code
+each time
+it is called.<br>
+<br><span style="font-style: italic;">refresh</span>
+(note: the&nbsp;event parameter passed to your function will always
+be
+nil, instead of a string, for a refresh event - this is for
+compatibility with older versions)<br>
+<div style="margin-left: 40px;">This is called whenever
+the text within a tooltip needs to
+be redrawn - this can happen fairly frequently<br>Intended for
+the majority of addons, which add content to a tooltip using the <code>AddLine</code>
+method or a similar function<br>If you added your function to <a href="#LINK_WRANGLER_CALLER"><code>LINK_WRANGLER_CALLER</code></a>
+your function, in effect, receives "refresh" events</div><br>"item", "spell", "enchant", "achievement", "talent", "quest", "glyph": (version 1.8 or later)<br><div style="margin-left: 40px;">One of these events immediately follows every <span style="font-style: italic;">refresh</span> event, depending of the type of link displayed in the tooltip.<br>Allows you to direct each registered link type to a different callback function (by calling <a href="#RegisterCallback">RegisterCallback</a> multiple times)<br>Allows you to&nbsp;register to only receive 'refresh' events for links of the type(s) your AddOn can handle</div><br>"maximize":<br>
+<div style="margin-left: 40px;">Called just before a
+tooltip gets de-minimized<br>Followed by&nbsp;<span style="font-style: italic;">refresh</span>&nbsp;<span style="font-style: italic;"></span>event</div><br>"minimize":<br>
+<div style="margin-left: 40px;">Called just before a
+tooltip gets minimized.
+</div><br>"show":<br>
+<div style="margin-left: 40px;">Called when the window is
+first opened, after the basic (Blizzard) data for the tooltip is
+loaded, but before
+other addons have modified the tooltip<br>Normally, but not
+always, followed by&nbsp;<span style="font-style: italic;">refresh</span>&nbsp;<span style="font-style: italic;"></span>event<br>Please
+do not modify text within a tooltip during this event (<span style="font-style: italic;">refresh</span> should be
+used for that purpose)
+</div><br>"hide":<br>
+<div style="margin-left: 40px;">Called when a tooltip is
+about to be closed, but before the
+data in the tooltip is cleared
+</div><br>"allocate":<br>
+<div style="margin-left: 40px;">Called when a LinkWrangler
+frame is dynamically allocated<br>
+When an AddOn requests this event, it will immediately receive
+callbacks for any/all windows that already exist<br>Use this
+event if you want to implement your own hooks into LinkWranglerTooltip#
+frames<br>Note: the link parameter will usually be nil when this
+callback occurs.
+</div><br>"showcomp":<br>
+<div style="margin-left: 40px;">Called when a Compare
+window is opened, after basic (SetHyperlink) text has been set.<br>The
+contents of the tooltip should not be modified during this event
+&nbsp;- any changes should be made during a <span style="font-style: italic;">refreshcomp</span> event
+instead.<br>Note: the link is&nbsp;a Link String, with name
+and colour codes</div><br>"refreshcomp": (version 1.64 or
+later)<br><div style="margin-left: 40px;">This
+parallels the <span style="font-style: italic;">refresh</span>
+event, for Compare windows<br>Under current implementation, it
+always immediately follows a <span style="font-style: italic;">showcomp</span>
+event, but this could change in future<br>Use
+this event to add or change text within a Compare tooltip. However
+please remember that Compare tooltips were intended as "mini"
+extensions to the main tooltip, and so should remain as small as
+possible.<br>The link parameter is a Link String, with name and
+colour codes<span style="font-style: italic;"></span></div><br>"hidecomp":<br>
+<div style="margin-left: 40px;">Called just before a
+Compare
+window is closed.<br>
+Note: The link is a Link String, with name and colour codes (though
+this is probably not relevant as the window is being hidden).</div>
+<br>"allocatecomp":<br>
+<div style="margin-left: 40px;">As "allocate" but for
+Compare frames (LinkWranglerCompare#)</div><hr style="width: 100%; height: 2px;"><h3><a name="LINK_WRANGLER_CALLER"></a><span style="font-weight: bold;">LINK_WRANGLER_CALLER</span></h3><br><code>LINK_WRANGLER_CALLER</code>
+should not be used when writing new AddOns. The information provided
+here is intended to help any developer trying to troubleshoot an old
+AddOn.<br><br>This was the old method of registering your
+function to
+be called back by LinkWrangler. It will continue to
+be&nbsp;supported,
+so that any AddOns that use it do not need to be rewritten.&nbsp;<br><br>Typical
+usage (in the event handler) was:<br><br><code>if
+IsAddOnLoaded ("LinkWrangler") then<br>&nbsp;&nbsp;&nbsp;
+LINK_WRANGLER_CALLER [ "AddOnName"] = "CallbackFunction"<br>end</code><br><br>or
+alternatively:<br><br><code>if LINK_WRANGLER_CALLER
+then &lt;etc.&gt;</code><br><br><ul><li>Note
+that the original specification required the name of the callback
+function to be passed in a string. This prevents you from using a local
+name for the function.</li><li>Otherwise the requirements
+of <span style="font-style: italic;">AddOnName</span>
+and <span style="font-style: italic;">CallbackFunction</span>
+are as for <a href="#RegisterCallback"><code>RegisterCallback</code></a></li><li>The
+current version of Linkwrangler simply redirects <code>LINK_WRANGLER_CALLER</code>
+into <code>RegisterCallback</code> (effectively
+registering a <span style="font-style: italic;">refresh</span>
+event).</li></ul>
+</body></html>

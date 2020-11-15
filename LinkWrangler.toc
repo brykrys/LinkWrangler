@@ -1,0 +1,26 @@
+﻿## Title: LinkWrangler
+## Notes: Open multiple item tooltip windows from links in chat
+## Title-zhCN: |cff7fff7f[物品链接]|rLinkWrangler
+## Notes-zhCN: 允许同时打开多个物品链接查看,并提供特殊功能.
+## Title-zhTW: |cff7fff7f[物品鏈結]|rLinkWrangler
+## Notes-zhTW: 允許同時打開多個物品鏈結查看,並提供特殊功能.
+
+## Version: 2.03
+## X-Release: Release
+## X-Date: 15 November 2020
+
+#@retail@
+## Interface: 90001
+#@end-retail@
+#@non-retail@
+# ## Interface: 11305
+#@end-non-retail@
+
+## SavedVariables: LinkWranglerSaved
+
+## Author: brykrys
+
+## X-Curse-Project-ID: 3579
+## X-WoWI-ID: 11155
+
+LinkWrangler.xml

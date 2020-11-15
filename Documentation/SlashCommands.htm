@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Slash Commands</title></head>
+<body>
+<h2 style="text-align: center;">Slash Commands</h2>
+<p><span style="font-weight: bold;">/linkwrangler</span> or <span style="font-weight: bold;">/lw</span> [options]</p>
+<span style="font-weight: bold;"><a name="enable"></a>enable</span>, <span style="font-weight: bold;">disable</span>, <span style="font-weight: bold;">toggle</span>
+<br>
+Used to <span style="font-style: italic;">temporarily</span> disable LinkWrangler, so that another mod (or
+original Blizzard code) can take over handling clicks on links.<br>
+This setting is NOT saved between sessions. Using '/lw' (with no options) will display the current status<br>
+You can also set a keybind to this toggle<br>
+&nbsp;<br>
+<span style="font-weight: bold;"><a name="status"></a>status</span>&nbsp;<span style="font-weight: bold;"></span>[default|test]
+<br>
+Displays the status of each of the configuration options
+<br>
+<span style="font-weight: bold;"></span><span style="font-weight: bold;">default</span>: sets all configuration variables to the default values<br><span style="font-weight: bold;">test</span>:
+Sets LinkWrangler to test saved variables when World of Warcraft is next reloaded (the same
+test that LinkWrangler normally runs if it detects that a new version
+has been installed)<br><br><span style="font-weight: bold;">help</span>
+<br>
+Displays a short reminder of available slash command options<br><br><a name="mode"></a><span style="font-weight: bold;">mode</span> [advanced|simple]<br>Default: advanced<br><span style="text-decoration: underline;">Requires a reload to take effect</span><br>Change
+the mode to use in the next session. Advanced mode allows all features.
+Simple mode disables some features in order to reduce taint in
+certain places.<br><span style="font-style: italic;">Note</span>: the&nbsp;<a href="#click">click settings</a> are unavailable in simple mode<br>
+<br>
+<span style="font-weight: bold;">list</span>
+<br>
+Lists the names of all the addons that are currently registered with
+LinkWrangler (Note that a few AddOns work
+differently, and will not appear in this list even if they are loaded
+correctly)<br><br><span style="font-weight: bold;">addons</span> &lt;enable|disable|enablecomp|disablecomp&gt; &lt;addon name|addon number&gt;<br>Enable
+or Disable the specified AddOn with respect to LinkWrangler's main or
+compare tooltips. Originally intended for users who don't like having
+too much extra data in the compare tooltips, and expanded from there.<br>The
+AddOn must be currently registered with LinkWrangler. The name is not
+case sensitive. Alternatively, you can use the AddOn's number as shown
+in the <span style="font-style: italic;">list</span> command above.<br><span style="font-weight: bold;">disable</span>: disables the AddOn for LinkWrangler's main tooltips<br><span style="font-weight: bold;">disablecomp</span>: disables the AddOn for LinkWrangler's compare tooltips<br><span style="font-weight: bold;">enable</span>, <span style="font-weight: bold;">enablecomp</span>: re-enables the AddOn for main or compare tooltips<br>AddOns are enabled for all tooltips by default<br><span style="font-style: italic;">Note</span>:
+This setting takes effect immediately for <span style="font-style: italic;">most</span> AddOns. However it may
+not take full effect for a few AddOns until you reload your session.<br><br><span style="font-weight: bold;"><a name="verbose"></a>verbose</span> [on|off|toggle]<br>Default: on<br>This
+setting determines whether certain informational&nbsp;messages are
+displayed. &nbsp;Typically these messages tell you why the link you
+clicked didn't do anything.<br>If this setting is off, the messages will not be displayed, and LinkWrangler will silently do nothing.<br><br>
+<span style="font-weight: bold;"></span><a name="savelayout"></a><span style="font-weight: bold;">savelayout</span> [on|off|toggle]<br>Default: on<br>This setting determines whether the screen locations of the LinkWrangler windows will be saved between sessions.<br>If
+this setting is on, the locations of your windows will be remembered
+between sessions. Window locations are saved per account (<span style="font-style: italic;">not</span> per character).<br>If this setting is off, the LinkWrangler windows will open in their default locations each time you re-log or reload UI<br><br><a name="comparestats"></a><span style="font-weight: bold;">comparestats</span> [on|off|toggle]<br>Default: on<br>Alias: <span style="font-weight: bold;">compstats</span><br>Enables
+the display of a list of stat comparisons in the compare tooltips.
+Displays how each stat will change if you replace the item in the
+compare tooltip (currently equipped) with the item in the main tooltip.
+Positive changes are shown in green, and negative changes in red.<br><br><a name="scale"></a><span style="font-weight: bold;">scale</span> &lt;number&gt;<br>Default: 1<br>Sets the scaling factor of all LinkWrangler windows, relative to the rest of the UI.<br>&lt;number&gt; must be a number between 0.2 and 2.5<br><br><a name="spacing"></a><span style="font-weight: bold;">spacing</span> [top|bottom|left|right &lt;number&gt;]<br>Default: 0<br>Alias: <span style="font-weight: bold;">padding</span><br>Prevents
+the LinkWrangler window from being dragged all the way to the edge of
+the screen; &lt;number&gt; determines how close it can get.<br>Intended to prevent LinkWrangler windows from getting stuck behind other frames around the screen edge.<br>&lt;number&gt; must be a number between 0 and 250<br><br><a name="Links"></a><span style="font-weight: bold;">itemlinks | spelllinks | questlinks | enchantlinks | achievementlinks | talentlinks | glyphlinks</span> [on|off|toggle]<br>Default: on<br>Determines whether LinkWrangler will handle each type of link.<br>If
+these settings are off, the related link type will be bypassed by
+LinkWrangler, to be handled by another AddOn or the default Blizzard
+functionality<br><span style="font-style: italic;"></span><span style="font-style: italic;">Note</span>:
+it is possible to disable all link types, in which case LinkWrangler will
+be effectively disabled (but some background processes will still be
+running)<br><br>
+<span style="font-weight: bold;"><a name="buttons"></a>buttons</span>
+[all|closeonly|closemin|close|noclose|minimize|nominimize|compare|nocompare|whisper|nowhisper|relink|norelink|dressup|nodressup|capture|nocapture]
+<br>
+Disables (hides) some of the buttons that normally appear down the right-hand side of each LinkWrangler window.
+<br>
+Default: all<br>
+<span style="font-weight: bold;">all</span>: enable all the buttons
+(default setting)<br>
+<span style="font-weight: bold;">closeonly</span>: enable the close button, disable all others<br>
+<span style="font-weight: bold;">closemin</span>: enable the close and minimise buttons, disable all others<br>
+<span style="font-weight: bold;">close</span>, <span style="font-weight: bold;">minimize</span>, <span style="font-weight: bold;">compare</span>, <span style="font-weight: bold;">whisper</span>, <span style="font-weight: bold;">relink</span>, <span style="font-weight: bold;">dressup, capture</span>: enable the relevant button<br>
+<span style="font-weight: bold;">noclose</span>, <span style="font-weight: bold;">nominimize</span>, <span style="font-weight: bold;">nocompare</span>, <span style="font-weight: bold;">nowhisper</span>, <span style="font-weight: bold;">norelink</span>, <span style="font-weight: bold;">nodressup, nocapture</span>: disable the relevant button<br>
+<span style="font-style: italic;">Note</span>: if you disable the close
+button, you can close a window by clicking on the same chat link again.
+You can close all windows using the key binding, or by pressing Escape <br><br><span style="font-style: italic;">Examples</span><br><br>To remove all the buttons except the Close button (so that the tooltip looks like the default Blizzard one)<br>&nbsp; &nbsp; /lw buttons closeonly<br><br>To remove <span style="font-style: italic;">all</span> the buttons<br>&nbsp; &nbsp; /lw buttons closeonly noclose<br><br>To get them all back<br>&nbsp; &nbsp; /lw buttons all<br><br>
+<span style="font-weight: bold;"><a name="click"></a>leftclick |</span> <span style="font-weight: bold;">rightclick |</span> <span style="font-weight: bold;">middleclick |</span> <span style="font-weight: bold;">allclick</span>&nbsp;&lt;key&gt; [=] &lt;command&gt;<br>
+These settings allow you to configure each mouse button to activate
+different functions. The shift, ctrl and alt keys can be set up to add
+more functions to each mouse button.<br>Default settings are indicated below<br>
+&lt;key&gt; can be one of the four following (listed in order of priority)<br>
+<span style="font-weight: bold;">shift</span> : action if shift key is held down. Default: bypass<br>
+<span style="font-weight: bold;">ctrl</span> : action if ctrl key is held down. Default: bypass<br>
+<span style="font-weight: bold;">alt</span> : action if alt key is held down. Default: bypass<br>
+<span style="font-weight: bold;">action</span> : action if no modifier keys are held down. Default: open<br>
+&lt;command&gt; may be one of the following (more to be added in future)<br>
+<span style="font-weight: bold;">open</span> : open a LinkWrangler Tooltip window<br>
+<span style="font-weight: bold;">bypass</span> : bypass LinkWrangler, allowing another AddOn, or the original Blizzard code, to&nbsp;respond to the click instead<br>
+<span style="font-weight: bold;">relink</span> : Relinks the link into your chat edit box; opens your edit box if it is not already open ("quick relink")<br>
+<span style="font-weight: bold;">dressup</span> : Tries on the item in the Dress Up window (checks that the item is wearable)<br><span style="font-weight: bold;">openmin</span> or <span style="font-weight: bold;">openminimized</span> : Opens the link as a minimized window (Warning: does <span style="font-style: italic;">not</span> check that the Minimize button is enabled!)<br>
+<br>
+<span style="font-weight: bold;">leftclick |</span> <span style="font-weight: bold;">rightclick |</span> <span style="font-weight: bold;">middleclick |</span> <span style="font-weight: bold;">allclick </span>&nbsp; default | disable<br>
+<span style="font-weight: bold;">default</span> sets the actions to the default values (as above)<br>
+<span style="font-weight: bold;">disable</span> sets all the actions to "bypass"<span style="font-weight: bold;"></span><br><br><span style="font-style: italic;">Examples</span><br><br>To
+disable the right mouse button - this causes LinkWrangler to completely
+ignore right button clicks. &nbsp;Right clicks will then open the
+default Blizzard tooltip, useful for other tooltip AddOns which don't work with LinkWrangler.<br>&nbsp; &nbsp; /lw rightclick disable<br><br>To set
+your middle mouse button to open the link in the Dressup window (when
+the shift, ctrl and alts keys are not being pressed):<br>&nbsp; &nbsp; /lw middleclick action=dressup<br><br>To
+swap the dressup and relink functions on your left mouse button (I
+doubt anyone would really do this, it's just an example...)<br>&nbsp; &nbsp; /lw leftclick shift=dressup ctrl=relink<br>&nbsp; &nbsp;<br>To reset everything to the default settings:<br>&nbsp; &nbsp; /lw allclick default<br>
+<span style="font-style: italic;"></span></body></html>

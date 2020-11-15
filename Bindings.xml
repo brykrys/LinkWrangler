@@ -1,0 +1,9 @@
+<Bindings>
+	<Binding name = "LINKWRANGLERCLOSE" header = "LINKWRANGLER">
+		LinkWrangler.CloseAllWindows();
+		PlaySound(PlaySoundKitID and "igMainMenuClose" or SOUNDKIT.IG_MAINMENU_CLOSE); -- HYBRID73
+	</Binding>
+	<Binding name = "LINKWRANGLERMINIMIZE">LinkWrangler.MinimizeAllWindows();</Binding>
+	<Binding name = "LINKWRANGLERENABLE">LinkWrangler.MasterSwitch("toggle");</Binding>
+	<Binding name = "LINKWRANGLERCAPTURE">LinkWrangler.CaptureTooltip();</Binding>
+</Bindings>

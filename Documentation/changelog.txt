@@ -1,0 +1,408 @@
+2.02 (Release)
+- TOC Update for WoW 8.2.5
+- Fix load error in Classic
+
+2.01 (Release)
+- TOC Update for WoW 8.1
+
+2.000 (Release)
+- As 1.991, with debugging disabled
+
+1.991 (Beta)
+- Remove registration of obsolete chat channels (fixes errors in Beta)
+- Register new chat channels
+
+1.99 (Release)
+- TOC Update for WoW 7.3
+
+1.981 (Beta)
+- Fix dragging Compare tooltips
+- Fix sound error on PTR
+
+1.98 (Release)
+- TOC Update for WoW 7.2
+
+1.97 (Release)
+- TOC Update for WoW 7.1
+- Fix SetPadding errors: now requires 2 parameters
+- Change tooltip drag method to use OnDrag* handlers, instead of TitleRegion
+
+1.96 (Release)
+- TOC update for WoW 7.0
+
+1.95 (Release)
+- TOC update for WoW 6.2
+
+1.94 (Release)
+- TOC update for WoW 6.1
+
+1.93 (Release)
+- As 1.921, but with debugging disabled
+
+1.921 (Beta)
+- TOC update for WoW 6.0
+- Fix error when capturing from mouseover
+
+1.92 (Release)
+- TOC update for WoW 5.4
+
+1.91 (Release)
+- TOC update for WoW 5.3
+
+1.90 (Release)
+- TOC update for WoW 5.2
+
+1.89 (Release)
+- TOC update for WoW 5.1
+
+1.88 (Release)
+- Protect against nil errors from missing ITEM_MOD_X_SHORT GlobalStrings
+
+1.871 (Beta)
+- TOC update for WoW 5.0
+- Remove comparisons to Range Slot and Ammo Slot - Ranged weapons now compared to Main Hand slot instead
+
+1.87 (Release)
+- Adds stat comparisons in Compare tooltips (uses GetItemStatDelta API function)
+- Slash command for stat comparisons: /lw comparestats on|off|toggle (shortened form /lw compstats)
+- Check for nil return from GetAddOnMetadata (due to problems with using "X-Release" in MoP Beta)
+
+1.86 (release)
+- TOC update for WoW 4.3
+
+1.85 (release)
+- TOC update for WoW 4.2
+- Implements spacing slash command
+- Implements mode slash command
+
+1.84 (release)
+- TOC update for Wow 4.1
+- Attempts to 'fix' bad item links when relinking
+- Initial code for "simple" mode
+
+1.83 (release)
+- TOC update for WoW 4.0
+- Track BattleNet whispers and conversations for Whisper button
+- Replace getglobal calls with _G
+
+1.82 (release)
+- Fix for ChatFrameEditBox nil error
+
+1.81 (release)
+- Code cleanup
+
+1.805 (beta)
+- Checks tooltip scale when calculating tooltip screen position (in case it has been changed by another AddOn)
+- Extra checking for badly formed textlinks (reported by ahua)
+- Use API to find a textlink, if no valid textlink is provided (item, spell, achievement only)
+- Capture keybind now works for spells (previously only worked for items)
+- Other tweaks and optimizations
+
+1.8 (release)
+- Moves SetItemRef hooking to PLAYER_ENTERING_WORLD - fixes problem with shift-clicking chat links
+- Adds linkType as 7th return value from LinkWrangler.GetLinkInfo(tooltip)
+- Adds new callbacks which trigger at the same time as "refresh", but only for the specified link type. Events are "item", "spell", "enchant", "achievement", "talent", "quest", "glyph"
+
+1.79 (release)
+- TOC update for WoW 3.2
+- Removes support for the obsolete EnhTooltip AddOn
+- Code cleanup
+
+1.78 (release)
+- Fixed LinkWrangler.RegisterCallback("addon", function) form - defaults to "refresh" if no events provided
+- Amended default function when clicking with Alt key held down to be "bypass" (only affects new installs or resets)
+
+1.77 (release)
+- Updated zhCN and zhTW localizations. Thanks to condywl
+
+1.765 (beta)
+- Added support for Glyph links
+- Changed button handler LinkWrangler.ButtonClick - in future to become a "documented" function (and so eligible for hooking)
+
+1.76 (release)
+- TOC update for WoW 3.1
+
+1.754 (beta)
+- New localization code
+- Localizations for Chinese and Korean
+- Relinking (button) should now work for Auctionhouse Search box and Macro edit box
+- Several minor bugfixes
+
+1.75 (release)
+- TOC update for WoW 3.0
+- Code cleanup and debug mode turned off
+
+1.746 (beta - 2.43LIVE and 3.0PTR)
+- Fix error when closing tooltip on PTR
+- Added talentlinks and achievementlinks for PTR
+- Fix for sizing problems when changing scale after moving a minimized tooltip
+
+1.745 (beta)
+- Fix "Retrieving item information" sometimes displaying when tooltip minimised
+- Should now handle WoW 3.0 style item links properly
+- removed maxwindows feature - now hard-coded to a value of 100
+- removed alllinks setting, replaced by...
+- added itemlinks, spelllinks, questlinks, enchantlinks settings
+- now uses IsDressableItem() to enable Dressup button - should now work the same as ctrl-click for all items
+
+1.74 (fixed release)
+- fix nil error for LWSAddOns during load, with certain combinations of other AddOns
+
+1.73 (release)
+- debug turned off and some code cleanup
+- minor bugfix from 1.727beta's update code
+
+1.727 (beta)
+- Added "capture" button to Compare tooltips
+- Modified /lw buttons <...> command to allow "capture" button to be disabled
+- Added "addons" slash command to allow some other AddOns to be selectively enabled/disabled for LinkWrangler Main or Compare tooltips
+
+1.723 (beta)
+- Added scale command
+- Simplified some internal code
+- change to avoid infinite loop if another addon crashes in the refresh callback
+
+1.72 (release)
+- debug turned off and some code cleanup
+
+1.713 (beta)
+- Change to detection code for Compare and Dressup buttons (they weren't always being displayed due to items not being in local cache when expected)
+
+1.712 (beta)
+- Can display Quest chat links
+- Fixed bug in 1.711beta preventing tooltips from closing when clicking on a link a second time (error info provided by lrdx (WoWUI); also reported by Nihlo (curse))
+
+1.711 (beta)
+- TOC update for WoW 2.4
+- Can display Spell chat links
+
+1.71 (release)
+- Code cleanup
+- Debug turned off
+
+1.705 (beta)
+- Fixed 'nil' error that sometimes occurred when closing LinkWrangler's Compare windows in a certain way
+- Reverted a change from 1.704, which caused incorrect items to appear in Compare windows
+
+1.704 (beta)
+- TOC update for WoW 2.3
+- Added Capture Tooltip keybind (equivalent to old LinkWrangler Grabber plugin)
+- Rewrote some internal functions
+
+1.7 (release)
+- TOC update for WoW 2.2
+- Debug functions disabled
+
+1.632 (beta)
+- "maxwindows" now takes a number (instead of on/off) - this is the maximum number of windows that LinkWrangler will create (default 20)
+- Rewrite of Callback handler - fixed "allocate" and "allocatecomp" events, added "refreshcomp" event
+- Change to LinkWrangler.OpenTooltip. Performs stricter checking of the link supplied. Will no longer accept item names (only proper links). Second parameter is now expected to be a table - see developer.htm for details
+
+1.631 (beta)
+- Added ability to save locations of LW windows on screen between sessions
+- New config option "savelayout" to enable above functionality
+- Changed default locations of windows (so they don't all appear on top of each other)
+
+1.63 (beta)
+- Can now open more LinkWrangler windows (capped to 20 for test purposes)
+- Key Binding text moved to localisation.lua file
+- New "Minimize All" keybinding
+- New click action (LeftClick etc.): "openmin" causes the window to be opened and minimized
+- Another fix for embedded info from Auctioneer pack AddOns (relating to Recipe links)
+- Added LinkWrangler.OpenTooltip function for other AddOns to open LW windows
+- Relink button will be hidden if there is no text link available
+
+1.62
+- Release version
+- Minor change to Compare button to include more recipes
+
+1.614 (beta)
+- Whisper and Dressup buttons will be hidden if the relevant function is unavailable.
+- Compare button will be hidden if the item cannot be equipped/compared at all.
+- Fix to default of RegisterCallback LW-API function
+
+1.613 (beta)
+- Fix for Blizzard's change to SetHyperlink
+- Disabled several sections of code that have become unnecessary
+
+1.61 (beta)
+- Support for links other than items (eg. Enchantments, Craft Recipes)
+- Added "verbose" and "alllinks" config options
+
+1.6
+- Updated toc for WoW 2.1
+- Release version: most debug functions disabled
+
+1.542 (beta)
+- Fix for changes in EnhTooltip(Auctioneer) - should cater properly for embedded EnhTooltips (even in older EnhTooltip versions)
+- Compare window Buttons now shown/hidden according to /lw buttons settings (close/relink buttons)
+- Fix for gap between Tooltip and second Compare window if you close the first compare window
+
+1.541 (beta)
+- Escape key should now correctly close all LinkWrangler windows
+- Added slash commands to enable/disable individual buttons (but does not affect Compare window buttons yet)
+
+1.54 (beta)
+- Compare button should now only be enabled if an item of the same type is currently equipped.
+- Changed the way /lw leftclick, etc, works. See SlashCommands.htm for more info. Based on a suggestion by Amavana.
+- QuickRelink is no longer a Config option, now included under the click commands.
+- Documentation now in .htm format
+
+- Introduced trial LinkWrangler API (see Developer.htm)
+- Active Saved Variables checking - tests variables after any version change
+- Extra error checking in some places reported by users
+
+1.533 (provisional release)
+- Reverted 2 code changes which appeared to be causing conflicts with other mods
+
+1.532 (beta)
+- Partial fix for compare button when inventory changes. Note: Compare button will be enabled if item is equippable, even if you do not have an item of the same type equipped (in which case, button does nothing) - Compare Item Relink button should now work correctly
+
+1.531 (unreleased beta)
+
+1.53 (beta)
+- added slash command to hide some of the buttons
+- calculates minimum height of tooltip based on number of visible buttons (means you should not get a tooltip with lots of blank space at the bottom).
+- more tweaks which should improve compatability with Auctioneer & co.
+
+1.521 (beta)
+- Extra check to make sure EnhTooltip exists, before trying to call it...
+
+1.52 (beta)
+- Updated toc
+- HotFix of 'flickering' window (rapid changes of width) - window width should remain stable in most circumstances, should no longer prevent closing windows
+
+1.51 (beta)
+- Now has a slash command handler
+- Can bind a key to enable/disable LinkWrangler (in case it conflicts with other mods) (Credit Amavana)
+- Old behaviour when all 5 windows are in use (see 1.42 below) can be re-enabled with a slash command
+- "Better shift-click" (see 1.34 below) disabled by default, but can be re-enabled with slash commands
+- Left/Right mouse buttons can be selectively set to bypass LinkWrangler ('disabled'); can also set shift/ctrl/alt keys to override this setting
+
+1.5
+- Workaround for failed SetHyperlink (works in most cases, but there may be some delay)
+- Improved detection of Enchantrix/Informant (Auctioneer pack)
+
+1.42 (beta)
+- New Author: brykrys
+- Undated toc for 2.0
+- Fixed various 'nil' errors
+- Fixed detection of dressing-room-able items
+- Workaround to detect failure to load link
+- Default behaviour when 5 windows are open changed to display a message when a 6th link is clicked (used to close ALL windows to display the new link)
+
+History from previous authors (extracted from http://ui.worldofwar.net/ui.php?id=894)
+
+1.4
+- Version update for 1.10
+
+Version 1.39
+- Added API for other AddOn's use of the Link Wrangler windows
+
+Version 1.38
+- Auctioneer fix
+
+Version 1.37
+- Now compatible PickingSkill
+
+Version 1.36
+- Now compatible with Instant damage
+
+Version 1.35
+- Fixed a bug that would cause duplicate data entries when Auctioneer was running in 'embedded' mode.
+
+Version 1.34
+- Added improved 'shift-click' functionality. If the link is in your local cache, it will open the chat text input and link the item. If the item is not in your local cache, it will work as the default unmodified version did.
+- Fixed a German text bug.
+
+Version 1.33
+- Fixed Auctioneer / Enchantrix compatibility (3.1.0.0439 and up only!)
+- Added complete German translation
+- Updated for 1800
+
+Version 1.32
+- Fixed a disconnect bug with Legendary items.
+
+Version 1.31
+- Dressing Room button should now work properly with German Client
+
+Version 1.3
+- Added a Dressing Room button to each tooltip window so that each item can be viewed in the dressing room.
+
+Version 1.272
+- Now compatible with the Dressing Room
+- Included a localization file with only partial German and French translation. Feel free to help out with its completion.
+
+Version 1.27
+- Fixed a residual text display bug
+
+Version 1.27
+- Fixed some bugs:
+1.) Minimize button and title overlap bug fixed
+2.) Hopefully the sizing bug after maximize is fixed (cant reproduce myself)
+3.) The display of 'Legendary' items is fixed
+4.) Disappearing buttons after close while minimized fixed
+
+Version 1.26
+- Added the 'minimize' feature to allow you to keep tooltips up with minimal game interference.
+- Added a 'Shift-Click' close feature to close all open Link Wrangler windows.
+
+Version 1.25
+- Now compatible with Enchantrix!
+- Fixed a small frame sizing bug
+
+Version 1.24
+- Now fully compatible with Auctioneer!
+
+Version 1.23
+- Added compatibility with KC_Items
+- Fixed a minor display bug
+
+Version 1.22
+- Yet another update due to code changes in ItemMatrix. Once again fully compatible!
+
+Version 1.21
+- Fixed another bug with AuctionMatrix compatibility.
+- Fixed a compatibility issue with new release of ItemsMatrix 12
+
+Version 1.2
+- Complete re-write of the relink code.
+- Fixed a bug with AuctionMatrix compatibility.
+
+Version 1.1
+- Now fully compatible with ItemsMatrix and AuctionMatrix!
+
+Version 1.052
+- Added a link button the comparison windows so that your items can now be linked to the chat window more easily.
+
+Version 1.051
+- Tweaked a small portion of the code to ensure limited compatibility with Auctioneer.
+
+Version 1.05
+- Now ACTUALLY compatible with linksnag!
+- Now compatible with Auctioneer.
+- Now compatible with Player Link Menu.
+
+Version 1.04
+- It appears as though the 'relink' option for loot messages was not working correctly. I have rewritten the relink code for this type of chat message.
+
+Version 1.031
+- Left some debug code in that would generate an error -> removed
+
+Version 1.03
+- Added relink item feature
+- Added close all windows with keystroke feature. Must bind key first
+- Item tooltips now toggle when clicked on instead of doing nothing.
+- Compatible with:
+- Equip Compare
+- Link snag (thanks to villageidiot)
+- Updated toc file (1500)
+
+Version 1.02
+- Added a feature to compare the link with currently equipped items
+- Added a feature to whisper the link originator.
+
+
+Version 1.01
+- Fixed a bug that would not allow clicking player names in the chat window.
+

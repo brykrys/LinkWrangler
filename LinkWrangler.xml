@@ -1,0 +1,190 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Include file = "Localization\Load.xml"/>
+	<Script file = "LinkWrangler.lua"/>
+	<Button name = "LinkWranglerButtonTemplate" virtual = "true">
+		<Size>
+			<AbsDimension x = "32" y = "32"/>
+		</Size>
+		<Scripts>
+			<OnClick>LinkWrangler.ButtonClick(self)</OnClick>
+			<OnEnter>LinkWrangler.ButtonTooltip(self)</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<GameTooltip
+		name = "LinkWranglerTooltipTemplate"
+		inherits = "GameTooltipTemplate"
+		parent = "UIParent"
+		enableMouse = "true"
+		toplevel = "true"
+		movable = "true"
+		frameStrata = "HIGH"
+		hidden = "true"
+		virtual = "true">
+		<Frames>
+			<Button name = "$parentCloseButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="CloseMain"</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Up"/>
+				<PushedTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Down"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+			<Button name = "$parentMinButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="Minimize"</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\AddOns\LinkWrangler\Icons\MinimizeUp"/>
+				<PushedTexture file = "Interface\AddOns\LinkWrangler\Icons\MinimizeDown"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+			<Button name = "$parentCompButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="Compare"</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\AddOns\LinkWrangler\Icons\CompareUp"/>
+				<PushedTexture file = "Interface\AddOns\LinkWrangler\Icons\CompareDown"/>
+				<DisabledTexture file = "Interface\AddOns\LinkWrangler\Icons\CompareDisabled"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+			<Button name = "$parentWhisperButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "-60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="Whisper"</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\AddOns\LinkWrangler\Icons\WhisperUp"/>
+				<PushedTexture file = "Interface\AddOns\LinkWrangler\Icons\WhisperDown"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+			<Button name = "$parentRelinkButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "-80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="Relink"</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\AddOns\LinkWrangler\Icons\RelinkUp"/>
+				<PushedTexture file = "Interface\AddOns\LinkWrangler\Icons\RelinkDown"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+			<Button name = "$parentDressupButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "-100"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="Dressup"</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\AddOns\LinkWrangler\Icons\DressingRoomUp"/>
+				<PushedTexture file = "Interface\AddOns\LinkWrangler\Icons\DressingRoomDown"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>LinkWrangler.TooltipOnShow(self)</OnShow>
+			<OnHide>LinkWrangler.TooltipOnHide(self)</OnHide>
+			<OnEnter>LinkWrangler.TooltipOnEnter(self, motion)</OnEnter>
+			<OnSizeChanged>LinkWrangler.TooltipOnSizeChanged(self)</OnSizeChanged>
+			<OnTooltipSetItem>LinkWrangler.TooltipSetItem(self)</OnTooltipSetItem>
+			<OnTooltipSetSpell>LinkWrangler.TooltipSetItem(self, true)</OnTooltipSetSpell>
+			<OnDragStart>self:StartMoving()</OnDragStart>
+			<OnDragStop>self:StopMovingOrSizing()</OnDragStop>
+		</Scripts>
+	</GameTooltip>
+	<GameTooltip
+		name = "LinkWranglerCompareTemplate"
+		inherits = "GameTooltipTemplate"
+		parent = "UIParent"
+		enableMouse = "true"
+		toplevel = "true"
+		movable = "true"
+		frameStrata = "HIGH"
+		hidden = "true"
+		virtual = "true">
+		<Frames>
+			<Button name = "$parentCloseButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="CloseComp";self.IsCompare = true</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Up"/>
+				<PushedTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Down"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+			<Button name = "$parentRelinkButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="Link";self.IsCompare = true</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\AddOns\LinkWrangler\Icons\RelinkUp"/>
+				<PushedTexture file = "Interface\AddOns\LinkWrangler\Icons\RelinkDown"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+			<Button name = "$parentCaptureButton" inherits = "LinkWranglerButtonTemplate">
+				<Anchors>
+					<Anchor point = "TOPRIGHT">
+						<Offset>
+							<AbsDimension x = "1" y = "-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.ButtonType="Capture";self.IsCompare = true</OnLoad>
+				</Scripts>
+				<NormalTexture file = "Interface\AddOns\LinkWrangler\Icons\CompareUp"/>
+				<PushedTexture file = "Interface\AddOns\LinkWrangler\Icons\CompareDown"/>
+				<HighlightTexture file = "Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode = "ADD"/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnDragStart>self:StartMoving()</OnDragStart>
+			<OnDragStop>self:StopMovingOrSizing()</OnDragStop>
+		</Scripts>
+	</GameTooltip>
+</Ui>
