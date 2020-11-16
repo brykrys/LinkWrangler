@@ -17,7 +17,6 @@ local LWSessionMode -- set at load time, then can only be changed by reloadui
 local LWDebugEnable = LWVersionInfo:lower() ~= "release"
 local LWMasterEnable = true
 local LWIsClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-print("LWDebug", WOW_PROJECT_ID, WOW_PROJECT_MAINLINE, WOW_PROJECT_CLASSIC) -- ###
 
 -- Global table for exports
 LinkWrangler = {}
@@ -113,6 +112,8 @@ do -- closed scope for 'g'
 			INVTYPE_WRIST			= {[1] = g"WRISTSLOT"},
 			INVTYPE_RANGED			= {[1] = g"RANGEDSLOT"},
 			INVTYPE_RANGEDRIGHT		= {[1] = g"RANGEDSLOT"},
+			INVTYPE_THROWN			= {[1] = g"RANGEDSLOT"},
+			INVTYPE_RELIC			= {[1] = g"RANGEDSLOT"},
 			INVTYPE_AMMO			= {[1] = g"AMMOSLOT"},
 		}
 	else -- Retail

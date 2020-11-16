@@ -1,3 +1,9 @@
+Version 2.032
+
+- Remove debug line at login
+
+- Fix Classic Comparison tooltips for Thrown and Relic
+
 Version 2.03
 
 - Update Retail version for WoW 9.0
