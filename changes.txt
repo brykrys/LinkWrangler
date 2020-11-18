@@ -4,6 +4,8 @@ Version 2.032
 
 - Fix Classic Comparison tooltips for Thrown and Relic
 
+- Retail TOC 9.0.2
+
 Version 2.03
 
 - Update Retail version for WoW 9.0
