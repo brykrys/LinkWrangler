@@ -1,3 +1,11 @@
+2.04 (Release)
+- Toc Updates for 9.0.5 and 1.13.6
+
+2.032 (Release)
+- Update Retail version for WoW 9.0.2
+- Fix Classic comparison tooltips for Thrown, and fix Relic properly
+- Remove debug lines
+
 2.03 (Release)
 - Update Retail version for WoW 9.0
 - Update Classic version fpr Wow 1.13.5

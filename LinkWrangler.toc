@@ -5,15 +5,15 @@
 ## Title-zhTW: |cff7fff7f[物品鏈結]|rLinkWrangler
 ## Notes-zhTW: 允許同時打開多個物品鏈結查看,並提供特殊功能.
 
-## Version: 2.032
+## Version: 2.04
 ## X-Release: Release
-## X-Date: 18 November 2020
+## X-Date: 10 April 2021
 
 #@retail@
-## Interface: 90002
+## Interface: 90005
 #@end-retail@
 #@non-retail@
-# ## Interface: 11305
+# ## Interface: 11306
 #@end-non-retail@
 
 ## SavedVariables: LinkWranglerSaved
