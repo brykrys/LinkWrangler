@@ -1,5 +1,9 @@
+2.05 (Release)
+- Package for BCC 2.5.1
+- TOC update for 1.13.7
+
 2.04 (Release)
-- Toc Updates for 9.0.5 and 1.13.6
+- TOC Updates for 9.0.5 and 1.13.6
 
 2.032 (Release)
 - Update Retail version for WoW 9.0.2
