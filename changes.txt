@@ -1,6 +1,4 @@
-Version 2.05
+Version 2.051
 
-- Add Burning Crusade 2.5.1 version to Packager
-
-- Update Classic version for Wow 1.13.7
+- Update Retail version for Wow 9.1.0
 
