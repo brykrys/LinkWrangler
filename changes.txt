@@ -1,4 +1,6 @@
-Version 2.051
+Version 2.052
 
-- Update Retail version for Wow 9.1.0
+- Update Classic version for 1.14.0
+
+- Update BCC version for 2.5.2
 
