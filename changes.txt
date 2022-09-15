@@ -1,5 +1,7 @@
 Version 2.06
 
+- Update for Wrath
+
 - Change to single package supporting multiple clients
 
 - Retail version 9.2.7, Wrath version 3.4.0, Classic version 1.14.3

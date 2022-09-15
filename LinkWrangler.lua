@@ -16,7 +16,7 @@ local LWSessionMode -- set at load time, then can only be changed by reloadui
 -- Control variables
 local LWDebugEnable = LWVersionInfo:lower() ~= "release"
 local LWMasterEnable = true
-local LWIsClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+local LWIsClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
 
 -- Global table for exports
 LinkWrangler = {}
