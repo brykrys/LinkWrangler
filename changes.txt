@@ -1,6 +1,5 @@
-Version 2.052
+Version 2.06
 
-- Update Classic version for 1.14.0
+- Change to single package supporting multiple clients
 
-- Update BCC version for 2.5.2
-
+- Retail version 9.2.7, Wrath version 3.4.0, Classic version 1.14.3

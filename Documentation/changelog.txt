@@ -1,3 +1,7 @@
+2.06
+- Change to multiple TOC single package
+- TOC updates for 9.2.7, 3.4.0, 2.5.4, 1.14.3
+
 2.052 (Release)
 - TOC update for 1.14.0
 - TOC update for 2.5.2
