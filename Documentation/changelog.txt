@@ -1,3 +1,6 @@
+2.061 (Beta)
+- Set Keybinds category to "Addons"
+
 2.06
 - Change to multiple TOC single package
 - TOC updates for 9.2.7, 3.4.0, 2.5.4, 1.14.3

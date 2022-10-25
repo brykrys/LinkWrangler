@@ -1,7 +1,3 @@
-Version 2.06
+Version 2.061
 
-- Update for Wrath
-
-- Change to single package supporting multiple clients
-
-- Retail version 9.2.7, Wrath version 3.4.0, Classic version 1.14.3
+- Change Keybindings to appear in "Addons" category. Keybinds should now work on PTR.
