@@ -1,3 +1,5 @@
 Version 2.061
 
-- Change Keybindings to appear in "Addons" category. Keybinds should now work on PTR.
+- TOC for 10.0.0 pre-patch
+
+- Change Keybindings to appear in "Addons" category

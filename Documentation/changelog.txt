@@ -1,4 +1,5 @@
-2.061 (Beta)
+2.061
+- TOC update for 10.0.0 pre-patch
 - Set Keybinds category to "Addons"
 
 2.06

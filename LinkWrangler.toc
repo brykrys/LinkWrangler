@@ -6,10 +6,10 @@
 ## Notes-zhTW: 允許同時打開多個物品鏈結查看,並提供特殊功能.
 
 ## Version: 2.061
-## X-Release: Beta
-## X-Date: 25 October 2022
+## X-Release: Release
+## X-Date: 26 October 2022
 
-## Interface: 90207
+## Interface: 100000
 ## Interface-Classic: 11403
 ## Interface-BCC: 20504
 ## Interface-Wrath: 30400
