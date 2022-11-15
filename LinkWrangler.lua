@@ -16,14 +16,16 @@ local LWSessionMode -- set at load time, then can only be changed by reloadui
 -- Control variables
 local LWDebugEnable = LWVersionInfo:lower() ~= "release"
 local LWMasterEnable = true
-local LWIsClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
+local LWIsClassic = WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE
+-- Flag for new Tooltip API introduced in WoW 10.0.2 {15/11/22}
+local LWIsNewTooltips = (TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall) and true or false
 
 -- Global table for exports
-LinkWrangler = {}
-LinkWrangler.Version = LWVersion
-LinkWrangler.VersionInfo = LWVersionInfo
-LinkWrangler.Startup = {}
-LinkWrangler.Startup.EarlyLoadAddOns = {}
+LinkWrangler = {
+	Version = LWVersion,
+	VersionInfo = LWVersionInfo,
+	Startup = {EarlyLoadAddOns = {}}
+}
 
 -- Utility function variables
 local LWStoredValueTable = {}
@@ -1062,6 +1064,13 @@ end
 -- local version for internal use. Export for keybind
 LinkWrangler.CloseAllWindows = LWCloseAllAction
 
+local function LWTooltipSetItemWrapper(frame)
+	LinkWrangler.TooltipSetItem(frame)
+end
+local function LWTooltipSetSpellWrapper(frame)
+	LinkWrangler.TooltipSetItem(frame, true)
+end
+
 local function LWCreateTooltipFrame()
 	if LWTooltipDataCount >= 100 then
 		-- maximum number of frames reached
@@ -1082,6 +1091,11 @@ local function LWCreateTooltipFrame()
 	frame:RegisterForDrag("LeftButton")
 	frame:SetScale(LWSConfig.scale)
 	frame:SetClampRectInsets(-LWSSpacing.left, LWSSpacing.right, LWSSpacing.top, -LWSSpacing.bottom)
+	if not LWIsNewTooltips then
+		-- scripts only exist in "old" tooltip API
+		frame:SetScript("OnTooltipSetItem", LWTooltipSetItemWrapper)
+		frame:SetScript("OnTooltipSetSpell", LWTooltipSetSpellWrapper)
+	end
 	LWSetFrameLayout(frame, LWTooltipDataCount) -- set starting position
 
 	-- start constructing data table for this window
@@ -1349,7 +1363,7 @@ LWSlashJump["mode"] = function (option, extra)
 	end
 end
 
--- node: overridden in simple mode
+-- note: overridden in simple mode
 local function LWSlashClickStatus(button, options) -- subfunction used by status and click handlers
 	local textout = format(LWS.ClickStatus,(LWL.Display[button] or button))
 	for action, code in pairs(options) do
@@ -2092,9 +2106,13 @@ end
 LinkWrangler.TooltipSetItem = function(frame, spell)
 	-- normally called from OnTooltipSetItem handler
 	-- 'spell' set to true if called from OnTooltipSetSpell handler
-	-- note there is no equivalent handler for quest links
+	-- note there is no equivalent handler for quest links (in "old" Tooltip API)
+
+	-- New Tooltip API: We will emulate OnTooltipSetItem and OnTooltipSetSpell
+	-- However we will receive calls for *every* tooltip, so we must check frame is a valid LW tooltip
 
 	local info = LWTooltipData[frame]
+	if not info then return end
 
 	-- how many times has LinkWrangler.TooltipSetItem been called since last SetHyperlink
 	local count = info.countSetLink + 1
@@ -2128,9 +2146,16 @@ LinkWrangler.TooltipSetItem = function(frame, spell)
 				end
 			end
 			-- Set Dressup button
-			if IsDressableItem(info.link) then
-				info.canDressup = true
-				buttons = true
+			if IsDressableItem then
+				if IsDressableItem(info.link) then
+					info.canDressup = true
+					buttons = true
+				end
+			else
+				if C_Item.IsDressableItemByID(info.link) then
+					info.canDressup = true
+					buttons = true
+				end
 			end
 		end
 	end
@@ -2266,8 +2291,13 @@ LinkWrangler.Startup.EventHandler1 = function(frame, event, addon)
 
 		-- setup hooks
 		if LWSConfig.mode == "simple" then
-			LWOriginalIRTSetHyperlink = ItemRefTooltip.SetHyperlink
-			ItemRefTooltip.SetHyperlink = LinkWrangler.Startup.HookIRTSetHyperlink
+			if ItemRefTooltip.ItemRefSetHyperlink then
+				LWOriginalIRTSetHyperlink = ItemRefTooltip.ItemRefSetHyperlink
+				ItemRefTooltip.ItemRefSetHyperlink = LinkWrangler.Startup.HookIRTSetHyperlink
+			else
+				LWOriginalIRTSetHyperlink = ItemRefTooltip.SetHyperlink
+				ItemRefTooltip.SetHyperlink = LinkWrangler.Startup.HookIRTSetHyperlink
+			end
 			LWSessionMode = "simple"
 			-- discard code not used by simple mode
 			LWQuickActionJump = nil
@@ -2285,6 +2315,10 @@ LinkWrangler.Startup.EventHandler1 = function(frame, event, addon)
 			SetItemRef = LinkWrangler.Startup.HookSetItemRef
 			LWSessionMode = "advanced"
 			LWSConfig.mode = "advanced"
+		end
+		if LWIsNewTooltips then
+			TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, LWTooltipSetItemWrapper)
+			TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Spell, LWTooltipSetSpellWrapper)
 		end
 
 		-- switch to main event handler

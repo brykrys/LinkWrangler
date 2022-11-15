@@ -1,5 +1,5 @@
-Version 2.061
+Version 2.062
 
-- TOC for 10.0.0 pre-patch
+- TOC for 10.0.2
 
-- Change Keybindings to appear in "Addons" category
+- Fix for Tooltip API changes

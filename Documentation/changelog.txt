@@ -1,3 +1,7 @@
+2.062 (Beta)
+- TOC update for 10.0.2
+- Basic fixes for Tooltip API changes
+
 2.061
 - TOC update for 10.0.0 pre-patch
 - Set Keybinds category to "Addons"

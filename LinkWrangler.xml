@@ -119,8 +119,6 @@
 			<OnHide>LinkWrangler.TooltipOnHide(self)</OnHide>
 			<OnEnter>LinkWrangler.TooltipOnEnter(self, motion)</OnEnter>
 			<OnSizeChanged>LinkWrangler.TooltipOnSizeChanged(self)</OnSizeChanged>
-			<OnTooltipSetItem>LinkWrangler.TooltipSetItem(self)</OnTooltipSetItem>
-			<OnTooltipSetSpell>LinkWrangler.TooltipSetItem(self, true)</OnTooltipSetSpell>
 			<OnDragStart>self:StartMoving()</OnDragStart>
 			<OnDragStop>self:StopMovingOrSizing()</OnDragStop>
 		</Scripts>
