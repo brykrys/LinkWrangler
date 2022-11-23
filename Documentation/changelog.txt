@@ -1,3 +1,6 @@
+2.07 (Release)
+- As 2.062 but switched to Release mode
+
 2.062 (Beta)
 - TOC update for 10.0.2
 - Basic fixes for Tooltip API changes

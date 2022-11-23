@@ -1,4 +1,6 @@
-Version 2.062
+Version 2.07
+
+- Release version, same as 2.062 but with Debug mode turned off
 
 - TOC for 10.0.2
 

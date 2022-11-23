@@ -5,9 +5,9 @@
 ## Title-zhTW: |cff7fff7f[物品鏈結]|rLinkWrangler
 ## Notes-zhTW: 允許同時打開多個物品鏈結查看,並提供特殊功能.
 
-## Version: 2.062
-## X-Release: Beta
-## X-Date: 15 November 2022
+## Version: 2.07
+## X-Release: Release
+## X-Date: 23 November 2022
 
 ## Interface: 100002
 ## Interface-Classic: 11403
