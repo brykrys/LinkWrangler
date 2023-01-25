@@ -1,7 +1,5 @@
-Version 2.07
+Version 2.08
 
-- Release version, same as 2.062 but with Debug mode turned off
+- TOC for 3.4.1
 
-- TOC for 10.0.2
-
-- Fix for Tooltip API changes
+- TOC for 10.0.5
