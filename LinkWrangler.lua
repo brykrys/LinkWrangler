@@ -19,6 +19,7 @@ local LWMasterEnable = true
 local LWIsClassic = WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE
 -- Flag for new Tooltip API introduced in WoW 10.0.2 {15/11/22}
 local LWIsNewTooltips = (TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall) and true or false
+local LWIsGameActive = false
 
 -- Global table for exports
 LinkWrangler = {
@@ -65,6 +66,7 @@ local LWCallbackType = {
 	item = 3, spell = 3, enchant = 3, achievement = 3, talent = 3, quest = 3, glyph = 3,
 	allocate = 4, allocatecomp = 5,
 	destroy = 0, destroycomp = 0, scan = 0,
+	gameactive = 10,
 	}
 
 -- Timer: variables & constants
@@ -491,7 +493,7 @@ local function LWSetAddOnSaved(addon)
 end
 
 -------------------------------------------------------------------------------------------
--- ADDON SUPPORT
+-- ADDON/PLUGIN SUPPORT
 -------------------------------------------------------------------------------------------
 
 local function LWCallbackRefresh(frame, link, linkType)
@@ -529,6 +531,17 @@ local function LWCallbackAction(frame, link, request)
 	end
 end
 
+-- Used for Global events that occur only once in a session
+-- Supports Plugins that do not have their own EventHandler
+local function LWCallbackEvent(event)
+	local callbacks = LWCallbackData[event]
+	if not callbacks then return end
+	for addon, func in pairs(callbacks) do
+		func(event)
+	end
+	LWCallbackData[event] = nil -- only used once per session, delete as no longer needed
+end
+
 LinkWrangler.RegisterCallback = function(addonname, callbackfunc, ...)
 	local errorstring
 	local numparams = select("#",...)
@@ -544,12 +557,10 @@ LinkWrangler.RegisterCallback = function(addonname, callbackfunc, ...)
 		errorstring = "Callback function parameter must be a valid function, global function name, or nil"
 	else
 		-- The Work Stuff
-		if type(LWCallbackData.enable[addonname]) ~= "boolean" then -- check if AddOn already registered
-			LWSetAddOnSaved (addonname)
-			tinsert(LWCallbackData.list, addonname)
-		end
+		local doSetAddOnSaved = false
 		if numparams < 1 then -- Default action when no extra params passed
 			LWCallbackData.refresh[addonname] = callbackfunc
+			doSetAddOnSaved = true
 		end
 		for i=1,numparams do
 			local param = (select(i,...))
@@ -566,14 +577,28 @@ LinkWrangler.RegisterCallback = function(addonname, callbackfunc, ...)
 			end
 			if requesttype == 1 then
 				LWCallbackData.refresh[addonname] = callbackfunc
-			elseif requesttype >= 2 then
+				doSetAddOnSaved = true
+			elseif requesttype >= 2 and requesttype < 10 then
 				local requesttable = LWCallbackData[param]
 				if not requesttable then
 					requesttable = {}
 					LWCallbackData[param] = requesttable
 				end
 				requesttable[addonname] = callbackfunc
+				doSetAddOnSaved = true
+			elseif requesttype == 10 then -- "gameactive" event
+				if LWIsGameActive then -- event has already occurred
+					callbackfunc("gameactive")
+				else
+					local requesttable = LWCallbackData.gameactive
+					if not requesttable then
+						requesttable = {}
+						LWCallbackData.gameactive = requesttable
+					end
+					requesttable[addonname] = callbackfunc
+				end
 			end
+			-- special extra handling for certain requesttypes
 			if callbackfunc then
 				if requesttype == 4 then
 					for frame,_ in pairs(LWTooltipData) do
@@ -586,6 +611,11 @@ LinkWrangler.RegisterCallback = function(addonname, callbackfunc, ...)
 				end
 			end
 		end
+		if doSetAddOnSaved and type(LWCallbackData.enable[addonname]) ~= "boolean" then -- check if AddOn already registered
+			LWSetAddOnSaved (addonname)
+			tinsert(LWCallbackData.list, addonname)
+		end
+
 	end
 
 	if errorstring then
@@ -2349,6 +2379,10 @@ LinkWrangler.Startup.EventHandler1 = function(frame, event, addon)
 
 		-- release startup code
 		LinkWrangler.Startup = nil
+
+		-- fire "gameactive" event
+		LWIsGameActive = true
+		LWCallbackEvent("gameactive")
 	end
 end
 
