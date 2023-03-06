@@ -14,33 +14,6 @@ shimFunctions["Auctionator"] = function()
     end
 end
 
-shimFunctions["LibExtraTip-1"] = function()
-    --LibExtraTip is an Library for adding things to tooltips.
-    local LibExtraTip = LibStub("LibExtraTip-1", true)
-    if LibExtraTip then
-        LinkWrangler.RegisterCallback(
-            "LibExtraTip.RegisterTooltip",
-            function(tip)
-                LibExtraTip:RegisterTooltip(tip)
-            end,
-            "allocate",
-            "allocatecomp"
-        )
-    end
-end
-shimFunctions["Profession Master"] = function()
-    --Profession Master - Guild Trade Skills: https://www.curseforge.com/wow/addons/profession-master
-    if ProfessionMasterAddon and TooltipService then
-        LinkWrangler.RegisterCallback(
-            "ProfessionMaster.TooltipService",
-            function(tip)
-                TooltipService:CheckTooltip(tip)
-            end,
-            "refresh"
-        )
-    end
-end
-
 shimFunctions["AtlasLoot"] = function()
     --Atlas Loot Classic : https://www.curseforge.com/wow/addons/atlaslootclassic
     if AtlasLoot and AtlasLoot.Tooltip then
@@ -48,6 +21,23 @@ shimFunctions["AtlasLoot"] = function()
             "AtlasLoot.Tooltip",
             function(tip)
                 AtlasLoot.Tooltip:AddTooltipSource(tip:GetName())
+            end,
+            "allocate",
+            "allocatecomp"
+        )
+    end
+end
+
+shimFunctions["BagSync"] = function()
+    --BagSync : https://www.curseforge.com/wow/addons/bagsync
+    local AceAddon = LibStub and LibStub("AceAddon-3.0", true) --Extra Checks to see if the addon is present.
+    local BagSync = AceAddon and AceAddon:GetAddon("BagSync", true) --Don't Error out if it's not there.
+    local BagSync_Tooltip = BagSync and BagSync:GetModule("Tooltip", true)
+    if BagSync_Tooltip then
+        LinkWrangler.RegisterCallback(
+            "BagSync.HookTooltip",
+            function(tip)
+                BagSync_Tooltip:HookTooltip(tip)
             end,
             "allocate",
             "allocatecomp"
@@ -68,16 +58,14 @@ shimFunctions["Gargul"] = function()
     end
 end
 
-shimFunctions["BagSync"] = function()
-    --BagSync : https://www.curseforge.com/wow/addons/bagsync
-    local AceAddon = LibStub("AceAddon-3.0", true) --Extra Checks to see if the addon is present.
-    local BagSync = AceAddon and AceAddon:GetAddon("BagSync", true) --Don't Error out if it's not there.
-    local BagSync_Tooltip = BagSync and BagSync:GetModule("Tooltip", true)
-    if BagSync_Tooltip then
+shimFunctions["LibExtraTip-1"] = function()
+    --LibExtraTip is an Library for adding things to tooltips.
+    local LibExtraTip = LibStub("LibExtraTip-1", true)
+    if LibExtraTip then
         LinkWrangler.RegisterCallback(
-            "BagSync.HookTooltip",
+            "LibExtraTip.RegisterTooltip",
             function(tip)
-                BagSync_Tooltip:HookTooltip(tip)
+                LibExtraTip:RegisterTooltip(tip)
             end,
             "allocate",
             "allocatecomp"
@@ -94,6 +82,19 @@ shimFunctions["MobInfo2"] = function()
                 MI2_BuildItemDataTooltip(tip, select(2, tip:GetItem()))
             end,
             "item"
+        )
+    end
+end
+
+shimFunctions["Profession Master"] = function()
+    --Profession Master - Guild Trade Skills: https://www.curseforge.com/wow/addons/profession-master
+    if ProfessionMasterAddon and TooltipService then
+        LinkWrangler.RegisterCallback(
+            "ProfessionMaster.TooltipService",
+            function(tip)
+                TooltipService:CheckTooltip(tip)
+            end,
+            "refresh"
         )
     end
 end
