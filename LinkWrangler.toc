@@ -22,3 +22,4 @@
 ## X-WoWI-ID: 11155
 
 LinkWrangler.xml
+ExternalShims.lua
