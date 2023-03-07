@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Include file = "Localization\Load.xml"/>
 	<Script file = "LinkWrangler.lua"/>
+
 	<Button name = "LinkWranglerButtonTemplate" virtual = "true">
 		<Size>
 			<AbsDimension x = "32" y = "32"/>
@@ -11,6 +12,7 @@
 			<OnLeave>GameTooltip:Hide()</OnLeave>
 		</Scripts>
 	</Button>
+
 	<GameTooltip
 		name = "LinkWranglerTooltipTemplate"
 		inherits = "GameTooltipTemplate"
@@ -123,6 +125,7 @@
 			<OnDragStop>self:StopMovingOrSizing()</OnDragStop>
 		</Scripts>
 	</GameTooltip>
+
 	<GameTooltip
 		name = "LinkWranglerCompareTemplate"
 		inherits = "GameTooltipTemplate"
@@ -185,4 +188,7 @@
 			<OnDragStop>self:StopMovingOrSizing()</OnDragStop>
 		</Scripts>
 	</GameTooltip>
+
+	<!-- Load Plugins after everything else -->
+	<Include file = "Plugins\Load.xml"/>
 </Ui>

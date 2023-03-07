@@ -293,7 +293,10 @@ Note: The link is a Link String, with name and colour codes (though
 this is probably not relevant as the window is being hidden).</div>
 <br>"allocatecomp":<br>
 <div style="margin-left: 40px;">As "allocate" but for
-Compare frames (LinkWranglerCompare#)</div><hr style="width: 100%; height: 2px;"><h3><a name="LINK_WRANGLER_CALLER"></a><span style="font-weight: bold;">LINK_WRANGLER_CALLER</span></h3><br><code>LINK_WRANGLER_CALLER</code>
+Compare frames (LinkWranglerCompare#)<br></div><br><h3>Special Callback Function</h3>"gameactive" (event):<br>
+<div style="margin-left: 40px;">Special event fired only once at the end of the Loading process. Does not include <span style="font-style: italic;">frame</span> or <span style="font-style: italic;">link</span> parameters, the 1st parameter is <span style="font-style: italic;">event</span> (i.e. "gameactive")<br>Fires after all normal AddOns are loaded (exception: Load-on-Demand AddOns can load at any time, so <span style="font-style: italic;">may</span> load after this event).<br>Provided
+as a means for simple Plugins to piggyback from LinkWrangler's
+EventHandler, so that they do not need to implement their own.<br>Note: if you attempt to register after the event has fired, the callback will be triggered immediately.<br></div><hr style="width: 100%; height: 2px;"><h3><a name="LINK_WRANGLER_CALLER"></a><span style="font-weight: bold;">LINK_WRANGLER_CALLER</span></h3><br><code>LINK_WRANGLER_CALLER</code>
 should not be used when writing new AddOns. The information provided
 here is intended to help any developer trying to troubleshoot an old
 AddOn.<br><br>This was the old method of registering your
