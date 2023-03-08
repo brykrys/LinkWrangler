@@ -1,3 +1,8 @@
+2.10
+- Implement new callback for plugins: "gameactive"
+- Implement Plugins folder
+- Implement plugins for LibExtraTip, AucAdvanced (replacing old LinkWrangler-Auctioneer plugin)
+
 2.08
 - TOC updates for 3.4.1 & 10.0.5
 

@@ -5,7 +5,7 @@
 ## Title-zhTW: |cff7fff7f[物品鏈結]|rLinkWrangler
 ## Notes-zhTW: 允許同時打開多個物品鏈結查看,並提供特殊功能.
 
-## Version: 2.08
+## Version: 2.10
 ## X-Release: Release
 ## X-Date: 25 January 2023
 

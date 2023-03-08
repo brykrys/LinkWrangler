@@ -109,7 +109,7 @@ parameters from the following: "refresh",&nbsp;"show", "hide",
 "maximize", "minimize", "allocate",&nbsp;"showcomp", "refreshcomp",
 "hidecomp",
 "allocatecomp", "item", "spell", "enchant", "achievement", "talent",
-"quest", "glyph". These correspond to the events described under the <a href="#Your_Callback_function">your callback function</a> section. Some events were not available in earlier versions; refer to that same section for version numbers.<br><br>
+"quest", "glyph", "gameactive". These correspond to the events described under the <a href="#Your_Callback_function">your callback function</a> section. Some events were not available in earlier versions; refer to that same section for version numbers.<br><br>
 <span style="font-weight: bold;">success [, value[,
 value]] =
 CallbackData ("AddOnName", "command")</span><br>Request
@@ -129,7 +129,7 @@ detected, returns nil and an error message string (and depending on
 debug settings, may pop up an error window).<br>An
 AddOn which has been 'disabled' will no longer receive events from
 LinkWrangler windows. The settings for main and compare windows are
-independant.<br>Note:
+independent. Addons&nbsp;will still receive certain 'Special' events used for setup or configuration<br>Note:
 This function should not be used during the <code>"ADDON_LOADED"</code> event for
 LinkWrangler, but should be valid any time after that event.<br><br>
 <span style="font-weight: bold;">frame, state, link,
@@ -293,10 +293,10 @@ Note: The link is a Link String, with name and colour codes (though
 this is probably not relevant as the window is being hidden).</div>
 <br>"allocatecomp":<br>
 <div style="margin-left: 40px;">As "allocate" but for
-Compare frames (LinkWranglerCompare#)<br></div><br><h3>Special Callback Function</h3>"gameactive" (event):<br>
+Compare frames (LinkWranglerCompare#)<br></div><br><h3>Special Callback Function</h3>"gameactive": (version 2.10 or later)<br>
 <div style="margin-left: 40px;">Special event fired only once at the end of the Loading process. Does not include <span style="font-style: italic;">frame</span> or <span style="font-style: italic;">link</span> parameters, the 1st parameter is <span style="font-style: italic;">event</span> (i.e. "gameactive")<br>Fires after all normal AddOns are loaded (exception: Load-on-Demand AddOns can load at any time, so <span style="font-style: italic;">may</span> load after this event).<br>Provided
-as a means for simple Plugins to piggyback from LinkWrangler's
-EventHandler, so that they do not need to implement their own.<br>Note: if you attempt to register after the event has fired, the callback will be triggered immediately.<br></div><hr style="width: 100%; height: 2px;"><h3><a name="LINK_WRANGLER_CALLER"></a><span style="font-weight: bold;">LINK_WRANGLER_CALLER</span></h3><br><code>LINK_WRANGLER_CALLER</code>
+as a means for simple plugins to piggyback from LinkWrangler's
+EventHandler, so that they do not need to implement their own.<br>Note: if you attempt to register after the event has fired, the callback will be triggered immediately.<br></div><br><br><hr style="width: 100%; height: 2px;"><h3><a name="LINK_WRANGLER_CALLER"></a><span style="font-weight: bold;">LINK_WRANGLER_CALLER</span></h3><br><code>LINK_WRANGLER_CALLER</code>
 should not be used when writing new AddOns. The information provided
 here is intended to help any developer trying to troubleshoot an old
 AddOn.<br><br>This was the old method of registering your
