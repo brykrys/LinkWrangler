@@ -1,3 +1,7 @@
+2.11
+- Use C_AddOns.GetAddOnMetadata if it exists, in place of GetAddOnMetadata
+- TOC for 10.1.0
+
 2.10
 - Implement new callback for plugins: "gameactive"
 - Implement Plugins folder
