@@ -1,3 +1,7 @@
+2.12
+- Test for obsolete LinkWranglerAuctioneer plugin, print warning if found
+- TOC for 3.4.2
+
 2.11
 - Use C_AddOns.GetAddOnMetadata if it exists, in place of GetAddOnMetadata
 - TOC for 10.1.0
