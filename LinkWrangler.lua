@@ -9,7 +9,7 @@
 -- VARIABLES
 -------------------------------------------------------------------------------------------
 
-local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
+local GetAddOnMetadata = C_AddOns.GetAddOnMetadata
 local LWVersion = tonumber(GetAddOnMetadata("LinkWrangler", "Version"))
 local LWVersionInfo = GetAddOnMetadata("LinkWrangler", "X-Release") or "Unknown"
 local LWSessionMode -- set at load time, then can only be changed by reloadui
