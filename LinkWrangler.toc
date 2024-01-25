@@ -5,12 +5,12 @@
 ## Title-zhTW: |cff7fff7f[物品鏈結]|rLinkWrangler
 ## Notes-zhTW: 允許同時打開多個物品鏈結查看,並提供特殊功能.
 
-## Version: 2.16
+## Version: 2.17
 ## X-Release: Release
-## X-Date: 12 November 2023
+## X-Date: 17 January 2024
 
-## Interface: 100200
-## Interface-Classic: 11404
+## Interface: 100205
+## Interface-Classic: 11500
 ## Interface-Wrath: 30403
 
 ## SavedVariables: LinkWranglerSaved

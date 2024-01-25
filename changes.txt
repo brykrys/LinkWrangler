@@ -1,5 +1,5 @@
-Version 2.16
+Version 2.17
 
-- Update for WoW 10.2.0
+- Update for WoW 1.15.0
 
-- Update for WoW 3.4.3
+- Update for WoW 10.2.5
