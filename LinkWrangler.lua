@@ -19,7 +19,7 @@ local LWDebugEnable = LWVersionInfo:lower() ~= "release"
 local LWMasterEnable = true
 local LWIsClassic = WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE
 -- Flag for new Tooltip API introduced in WoW 10.0.2 {15/11/22}
-local LWIsNewTooltips = (TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall) and true or false
+local LWIsNewTooltips = (C_TooltipInfo and TooltipUtil and TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall) and true or false
 local LWIsGameActive = false
 
 -- Global table for exports
@@ -173,6 +173,22 @@ local format, strlower = format, strlower
 local strfind, strmatch = strfind, strmatch
 local pcall = pcall
 local _G = _G
+
+-- functions renamed by various patches
+local GetItemInfo = C_Item.GetItemInfo or GetItemInfo
+local IsEquippableItem = C_Item.IsEquippableItem or IsEquippableItem
+local IsDressableItem = C_Item.IsDressableItemByID or IsDressableItem
+local GetItemStatDelta = C_Item.GetItemStatDelta or GetItemStatDelta
+
+local GetDisplayedItem, GetDisplayedSpell
+if TooltipUtil then
+	-- These are replacements for tooltip:GetItem and tooltip:GetSpell in 10.0.2
+	GetDisplayedItem = TooltipUtil.GetDisplayedItem
+	GetDisplayedSpell = TooltipUtil.GetDisplayedSpell
+else
+	GetDisplayedItem = function(tooltip) return tooltip:GetItem() end
+	GetDisplayedSpell = function(tooltip) return tooltip:GetSpell() end
+end
 
 -------------------------------------------------------------------------------------------
 -- INTERNAL UTILITY FUNCTIONS
@@ -1987,9 +2003,9 @@ i.e. captures link from whatever item is under the mouse
 LinkWrangler.CaptureTooltip = function()
 	if GameTooltip:IsVisible() and LWMasterEnable then
 		-- find link from tooltip
-		local _, getlink = GameTooltip:GetItem()
+		local _, getlink = GetDisplayedItem(GameTooltip)
 		if not getlink then
-			local _, _, spellID = GameTooltip:GetSpell()
+			local _, spellID = GetDisplayedSpell(GameTooltip)
 			if spellID then
 				getlink = GetSpellLink(spellID)
 			end
@@ -2177,16 +2193,9 @@ LinkWrangler.TooltipSetItem = function(frame, spell)
 				end
 			end
 			-- Set Dressup button
-			if IsDressableItem then
-				if IsDressableItem(info.link) then
-					info.canDressup = true
-					buttons = true
-				end
-			else
-				if C_Item.IsDressableItemByID(info.link) then
-					info.canDressup = true
-					buttons = true
-				end
+			if IsDressableItem(info.link) then
+				info.canDressup = true
+				buttons = true
 			end
 		end
 	end

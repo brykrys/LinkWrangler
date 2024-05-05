@@ -1,3 +1,10 @@
+2.18
+- TOC for 1.15.2
+- TOC for 10.2.6
+- Updates for some deprecated API functions in Retail (C_Item functions)
+- Add TOC for Cataclysm
+- Workaround for detecting which tooltip API to use in Cataclysm
+
 2.17
 - TOC for 1.15.0
 - TOC for 10.2.5
