@@ -6,7 +6,7 @@
 -- Check for LinkWranglerAuctioneer still installed.
 -- Note: Attempting to directly disable an AddOn using the API currently appears to be broken
 -- (causes disconnects when reloading, and the AddOn still does not get disabled)
-local _, _, _, loadable = GetAddOnInfo("LinkWranglerAuctioneer")
+local _, _, _, loadable = C_AddOns.GetAddOnInfo("LinkWranglerAuctioneer")
 if loadable then
 	print("LinkWrangler has detected a copy of 'LinkWranglerAuctioneer' installed as a separate AddOn.\nThe 'LinkWranglerAuctioneer' AddOn should be uninstalled as it is no longer needed.")
 end

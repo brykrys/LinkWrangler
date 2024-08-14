@@ -1,11 +1,9 @@
-Version 2.18
+Version 2.19
 
-- Update for WoW 1.15.2
+- Update for WoW 1.15.3
 
-- Update for WoW 10.2.6
+- Update for WoW 11.0.2
 
 - Updates for some deprecated API functions in Retail
 
-- Add TOC for Cataclysm
 
-- Workaround for detecting which tooltip API to use in Cataclysm

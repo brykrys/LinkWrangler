@@ -179,6 +179,7 @@ local GetItemInfo = C_Item.GetItemInfo or GetItemInfo
 local IsEquippableItem = C_Item.IsEquippableItem or IsEquippableItem
 local IsDressableItem = C_Item.IsDressableItemByID or IsDressableItem
 local GetItemStatDelta = C_Item.GetItemStatDelta or GetItemStatDelta
+local GetSpellLink = C_Spell.GetSpellLink or GetSpellLink
 
 local GetDisplayedItem, GetDisplayedSpell
 if TooltipUtil then

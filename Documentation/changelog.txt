@@ -1,3 +1,8 @@
+2.19
+- TOC for 1.15.3
+- TOC for 11.0.2
+- Updates for some deprecated API functions in Retail (C_AddOns and C_Spell functions)
+
 2.18
 - TOC for 1.15.2
 - TOC for 10.2.6
