@@ -1,9 +1,5 @@
-Version 2.19
+Version 2.20
 
-- Update for WoW 1.15.3
+- Fix for error when minimizing tooltip in Retail
 
-- Update for WoW 11.0.2
-
-- Updates for some deprecated API functions in Retail
-
-
+- Update for TOC 11.2.0 & 1.15.7
