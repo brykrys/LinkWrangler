@@ -442,7 +442,6 @@ end
 local function LWSetFrameLayout(frame, index)
 	local x, y, saved
 	local scale = LWSConfig.scale
-	frame:ClearAllPoints()
 	-- try to restore saved layout for this frame
 	if LWSConfig.savelayout then
 		saved = LWSLayout[index]
@@ -472,6 +471,7 @@ local function LWSetFrameLayout(frame, index)
 		x = (index-1) *screenx /5 +30
 		y = -.3 * screeny
 	end
+	frame:ClearAllPoints()
 	frame:SetPoint("TOPLEFT", nil, "TOPLEFT", x/scale, y/scale)
 end
 
@@ -1308,8 +1308,9 @@ local function LWMinimizeTooltip(frame)
 		info.state = 1
 		LWCallbackAction(frame, link, "maximize")
 		-- ensure anchored by top left corner
+		local left, top = frame:GetLeft(), frame:GetTop()-GetScreenHeight()/frame:GetScale()
 		frame:ClearAllPoints()
-		frame:SetPoint("TOPLEFT", nil, "TOPLEFT", frame:GetLeft(), frame:GetTop()-GetScreenHeight()/frame:GetScale())
+		frame:SetPoint("TOPLEFT", nil, "TOPLEFT", left, top)
 		-- redraw frame
 		LWReloadTooltip(frame, info)
 		frame:Raise()
@@ -1320,8 +1321,9 @@ local function LWMinimizeTooltip(frame)
 		LWTimerReloadList[frame] = nil
 		LWCallbackAction(frame, link, "minimize")
 		-- ensure anchored by top left corner
+		local left, top = frame:GetLeft(), frame:GetTop()-GetScreenHeight()/frame:GetScale()
 		frame:ClearAllPoints()
-		frame:SetPoint("TOPLEFT", nil, "TOPLEFT", frame:GetLeft(), frame:GetTop()-GetScreenHeight()/frame:GetScale())
+		frame:SetPoint("TOPLEFT", nil, "TOPLEFT", left, top)
 		-- clear everything except the title
 		frame:SetText(info.titleFrame:GetText(), info.titleFrame:GetTextColor())
 		frame:Lower()
