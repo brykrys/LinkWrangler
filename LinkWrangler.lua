@@ -191,6 +191,8 @@ else
 	GetDisplayedSpell = function(tooltip) return tooltip:GetSpell() end
 end
 
+local issecretvalue = issecretvalue or function() end -- ### hybrid : always returns nil for clients that don't have secret values
+
 -------------------------------------------------------------------------------------------
 -- INTERNAL UTILITY FUNCTIONS
 -------------------------------------------------------------------------------------------
@@ -267,7 +269,7 @@ local function LWGetDefaultSaveTable()
 			verbose = true,
 			savelayout = true,
 			scale = 1,
-			mode = "advanced",
+			mode = "simple",
 			comparestats = true,
 		},
 		Click = {
@@ -2408,8 +2410,8 @@ LinkWrangler.Startup.EventHandler2 = function(frame, eventname, data1, data2)
 		LWLogoutSaveLayout ()
 		LWLogoutSaveAddOns ()
 	-- at this point, event must be a chat message of some sort
-	elseif LWMasterEnable and LWSButtons.whisper and data2 and #data2 > 0 and strmatch(data1, "|H") then
-		-- only save lines which have a valid player name and have hyperlink escape codes
+	elseif LWMasterEnable and LWSButtons.whisper and not (issecretvalue(data1) or issecretvalue(data2)) and data2 and #data2 > 0 and strmatch(data1, "|H") then
+		-- only save lines which have a valid non-secret player name and have hyperlink escape codes
 		LWChatBufferTextList[LWChatBufferIndex] = data1
 		LWChatBufferNameList[LWChatBufferIndex] = data2
 

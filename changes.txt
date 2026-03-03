@@ -1,5 +1,7 @@
-Version 2.21
+Version 2.22
 
-- Update for TOC 12.0.0, 5.5.3, 1.15.8
+- Default mode changed to "simple" - this does not change existing configs, only affects new or reset
 
-- Remove separate TOC files for different versions
+- Add TOC for 2.5.5
+
+- Disable Whisper feature when secret values are detected

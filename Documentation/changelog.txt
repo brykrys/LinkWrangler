@@ -1,3 +1,8 @@
+2.22
+- Change default mode to "simple"
+- Stop processing chat events (for the Whisper feature) if a secret variable is detected
+- Add TOC for 2.5.5
+
 2.21
 - TOC for 12.0.0, 5.5.3, 1.15.8
 - Remove separate TOCs for different versions
